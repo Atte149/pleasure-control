@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { BatteryIndicator } from '@/components/BatteryIndicator';
-import { getServerUrl, setServerUrl, normalizeServerUrl } from '@/lib/serverConfig';
+import { getServerUrl, setServerUrl, normalizeServerUrl, isAndroid } from '@/lib/serverConfig';
 import {
   Bluetooth,
   Wifi,
@@ -19,6 +19,7 @@ import {
   Loader2,
   Signal,
   Server,
+  ExternalLink,
 } from 'lucide-react';
 import type { DeviceState } from '@/types';
 
@@ -100,10 +101,28 @@ export function DevicePanel({
                 disabled={isConnecting}
                 className="font-mono text-sm"
               />
-              <p className="text-xs text-muted-foreground">
-                On a phone, enter your PC's IP running Intiface (e.g. ws://192.168.1.100:12345).
-                On desktop the default usually works.
-              </p>
+              {isAndroid() ? (
+                <div className="p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 rounded-md space-y-2">
+                  <p className="text-xs text-blue-700 dark:text-blue-300">
+                    <strong>On Android:</strong> Install <strong>Intiface Central</strong> from the Play Store,
+                    start the server, and use <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">ws://localhost:12345</code> (default).
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => window.open('https://play.google.com/store/apps/details?id=org.metafetish.intiface_central', '_blank')}
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 mr-2" />
+                    Install Intiface Central
+                  </Button>
+                </div>
+              ) : (
+                <p className="text-xs text-muted-foreground">
+                  On desktop the default usually works. On a phone connecting to a PC, enter your PC's IP
+                  running Intiface (e.g. ws://192.168.1.100:12345).
+                </p>
+              )}
             </div>
           )}
 

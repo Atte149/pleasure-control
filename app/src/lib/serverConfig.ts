@@ -2,11 +2,22 @@
 // On web (served from the PC) we default to the page host.
 // On Android (Capacitor) window.location.hostname is not the PC, so the user
 // must point the app at the PC running Intiface — we persist that choice.
+// If Intiface Mobile is running on the same Android device, use ws://localhost:12345.
 
 const STORAGE_KEY = 'pleasure-control-server-url';
 const DEFAULT_PORT = 12345;
 
+function isAndroid(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  return /android/i.test(navigator.userAgent);
+}
+
 function defaultUrl(): string {
+  // On Android, default to localhost (assumes Intiface Mobile running on the device).
+  // On web/desktop, default to the page's hostname (the PC serving the app).
+  if (isAndroid()) {
+    return `ws://localhost:${DEFAULT_PORT}`;
+  }
   const host =
     typeof window !== 'undefined' &&
     window.location.hostname &&
@@ -45,4 +56,4 @@ export function normalizeServerUrl(input: string): string {
   }
 }
 
-export { DEFAULT_PORT };
+export { DEFAULT_PORT, isAndroid };
