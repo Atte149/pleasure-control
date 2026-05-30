@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { BatteryIndicator } from '@/components/BatteryIndicator';
+import { getServerUrl, setServerUrl, normalizeServerUrl } from '@/lib/serverConfig';
 import {
   Bluetooth,
   Wifi,
@@ -14,6 +18,7 @@ import {
   Smartphone,
   Loader2,
   Signal,
+  Server,
 } from 'lucide-react';
 import type { DeviceState } from '@/types';
 
@@ -44,6 +49,14 @@ export function DevicePanel({
   onStopAll,
   onClearError,
 }: DevicePanelProps) {
+  const [serverUrl, setServerUrlState] = useState(() => getServerUrl());
+
+  const handleServerUrlBlur = () => {
+    const normalized = normalizeServerUrl(serverUrl);
+    setServerUrlState(normalized);
+    setServerUrl(normalized);
+  };
+
   return (
     <div className="space-y-4">
       <Card>
@@ -72,6 +85,27 @@ export function DevicePanel({
               {isConnected ? 'Active' : 'Idle'}
             </Badge>
           </div>
+
+          {!isConnected && (
+            <div className="space-y-2">
+              <Label className="text-sm flex items-center gap-2">
+                <Server className="w-3.5 h-3.5" />
+                Intiface Server Address
+              </Label>
+              <Input
+                value={serverUrl}
+                onChange={(e) => setServerUrlState(e.target.value)}
+                onBlur={handleServerUrlBlur}
+                placeholder="ws://192.168.1.100:12345"
+                disabled={isConnecting}
+                className="font-mono text-sm"
+              />
+              <p className="text-xs text-muted-foreground">
+                On a phone, enter your PC's IP running Intiface (e.g. ws://192.168.1.100:12345).
+                On desktop the default usually works.
+              </p>
+            </div>
+          )}
 
           {error && (
             <div className="p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-md flex items-start gap-2 animate-in fade-in slide-in-from-top-2">

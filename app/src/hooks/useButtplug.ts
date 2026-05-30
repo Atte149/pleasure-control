@@ -5,8 +5,8 @@ import {
   ButtplugClientDevice,
 } from 'buttplug';
 import type { DeviceState } from '@/types';
+import { getServerUrl } from '@/lib/serverConfig';
 
-const WS_URL = `ws://${typeof window !== 'undefined' ? window.location.hostname : 'localhost'}:12345`;
 const SCAN_TIMEOUT_MS = 30000;
 const DEVICE_POLL_MS = 2000;
 
@@ -158,7 +158,7 @@ export function useButtplug() {
 
     try {
       const buttplugClient = new ButtplugClient('Buttplug Controller');
-      const connector = new ButtplugBrowserWebsocketClientConnector(WS_URL);
+      const connector = new ButtplugBrowserWebsocketClientConnector(getServerUrl());
 
       buttplugClient.addListener('deviceadded', (device: ButtplugClientDevice) => {
         addDevice(device);
