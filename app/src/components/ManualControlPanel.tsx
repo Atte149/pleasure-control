@@ -167,10 +167,10 @@ export function ManualControlPanel({
       </div>
 
       {activeTab === 'master' ? (
-        <Card>
+        <Card className="transition-all duration-300 hover:shadow-lg">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
-              <Zap className="w-5 h-5" />
+              <Zap className="w-5 h-5 text-primary" />
               Master Control
             </CardTitle>
           </CardHeader>
@@ -181,16 +181,24 @@ export function ManualControlPanel({
                   <Zap className="w-4 h-4" />
                   All Devices Vibration
                 </Label>
-                <Badge variant="secondary">{Math.round(masterIntensity * 100)}%</Badge>
+                <Badge variant="secondary" className="text-base font-semibold">{Math.round(masterIntensity * 100)}%</Badge>
               </div>
-              <Slider
-                value={[masterIntensity]}
-                onValueChange={([v]) => handleMasterVibrate(v)}
-                min={0}
-                max={1}
-                step={0.01}
-                className="w-full"
-              />
+              <div className="relative">
+                <Slider
+                  value={[masterIntensity]}
+                  onValueChange={([v]) => handleMasterVibrate(v)}
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  className="w-full"
+                />
+                {masterIntensity > 0 && (
+                  <div
+                    className="absolute -top-1 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-300 animate-gradient"
+                    style={{ width: `${masterIntensity * 100}%` }}
+                  />
+                )}
+              </div>
             </div>
             <Button onClick={stopAll} variant="destructive" className="w-full">
               Stop All Devices
@@ -206,17 +214,19 @@ export function ManualControlPanel({
             const hasOscillate = device?.hasOutput(OutputType.Oscillate) ?? false;
 
             return (
-              <Card key={deviceIndex}>
+              <Card key={deviceIndex} className="transition-all duration-300 hover:shadow-lg">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base flex items-center gap-2">
-                      <Smartphone className="w-4 h-4" />
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                        <Smartphone className="w-4 h-4 text-primary" />
+                      </div>
                       {device?.displayName || deviceName}
                     </CardTitle>
                     <div className="flex gap-1">
-                      {hasVibrate && <Badge variant="outline" className="text-xs">VIB</Badge>}
-                      {hasRotate && <Badge variant="outline" className="text-xs">ROT</Badge>}
-                      {hasOscillate && <Badge variant="outline" className="text-xs">OSC</Badge>}
+                      {hasVibrate && <Badge variant="outline" className="text-xs bg-primary/10 border-primary/20">VIB</Badge>}
+                      {hasRotate && <Badge variant="outline" className="text-xs bg-accent/10 border-accent/20">ROT</Badge>}
+                      {hasOscillate && <Badge variant="outline" className="text-xs bg-secondary/50 border-secondary">OSC</Badge>}
                     </div>
                   </div>
                 </CardHeader>
@@ -228,17 +238,26 @@ export function ManualControlPanel({
                           <Zap className="w-3.5 h-3.5" />
                           Vibration
                         </Label>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm font-medium text-primary">
                           {Math.round(vibrateIntensity * 100)}%
                         </span>
                       </div>
-                      <Slider
-                        value={[vibrateIntensity]}
-                        onValueChange={([v]) => handleVibrateChange(deviceIndex, v)}
-                        min={0}
-                        max={1}
-                        step={0.01}
-                      />
+                      <div className="relative">
+                        <Slider
+                          value={[vibrateIntensity]}
+                          onValueChange={([v]) => handleVibrateChange(deviceIndex, v)}
+                          min={0}
+                          max={1}
+                          step={0.01}
+                          className="w-full"
+                        />
+                        {vibrateIntensity > 0 && (
+                          <div
+                            className="absolute -top-1 left-0 h-1 bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300 animate-pulse"
+                            style={{ width: `${vibrateIntensity * 100}%` }}
+                          />
+                        )}
+                      </div>
                     </div>
                   )}
 
@@ -249,7 +268,7 @@ export function ManualControlPanel({
                           <RotateCw className="w-3.5 h-3.5" />
                           Rotation
                         </Label>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm font-medium text-accent">
                           {Math.round(rotateIntensity * 100)}%
                         </span>
                       </div>
@@ -270,7 +289,7 @@ export function ManualControlPanel({
                           <Activity className="w-3.5 h-3.5" />
                           Oscillation
                         </Label>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm font-medium text-secondary-foreground">
                           {Math.round(oscillateIntensity * 100)}%
                         </span>
                       </div>
