@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import {
   Smartphone,
   Waves,
@@ -42,14 +43,18 @@ export function Layout({
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20">
               <Bluetooth className="w-4 h-4 text-primary-foreground" />
             </div>
-            <h1 className="font-semibold text-lg hidden sm:block">Buttplug Controller</h1>
-            <h1 className="font-semibold text-lg sm:hidden">BP Controller</h1>
+            <h1 className="font-semibold text-lg hidden sm:block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Pleasure Control
+            </h1>
+            <h1 className="font-semibold text-lg sm:hidden bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              PC
+            </h1>
           </div>
 
           <div className="flex items-center gap-3">
@@ -58,7 +63,7 @@ export function Layout({
               {isConnected ? (
                 <>
                   <Wifi className="w-4 h-4 text-green-500" />
-                  <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200 hidden sm:inline-flex">
+                  <Badge variant="outline" className="text-xs bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800 hidden sm:inline-flex">
                     {deviceCount} device{deviceCount !== 1 ? 's' : ''}
                   </Badge>
                 </>
@@ -72,10 +77,13 @@ export function Layout({
               )}
             </div>
 
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 hover:bg-accent rounded-md"
+              className="lg:hidden p-2 hover:bg-accent rounded-md transition-colors"
             >
               <Menu className="w-5 h-5" />
             </button>
