@@ -1,0 +1,137 @@
+/* Buttplug Controller - Custom Styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better mobile touch targets */
+button,
+[role="button"] {
+  min-height: 36px;
+  touch-action: manipulation;
+}
+
+/* Canvas styling */
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Slider improvements for mobile */
+[data-slot="slider-track"] {
+  height: 6px !important;
+}
+
+[data-slot="slider-thumb"] {
+  width: 20px !important;
+  height: 20px !important;
+  border-width: 2px !important;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-hover:active {
+  transform: scale(0.98);
+}
+
+/* Animation for connecting state */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.3);
+  }
+  70% {
+    box-shadow: 0 0 0 10px hsl(var(--primary) / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0);
+  }
+}
+
+.connecting-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scanning animation */
+@keyframes scanning {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.scanning-active {
+  animation: scanning 1.5s ease-in-out infinite;
+}
+
+/* Firefox-specific fixes */
+@-moz-document url-prefix() {
+  input[type="range"] {
+    height: 6px;
+  }
+}
+
+/* Prevent text selection on UI elements */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Better scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Audio waveform bar animation */
+@keyframes bar-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.25rem !important;
+  }
+  
+  h2 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

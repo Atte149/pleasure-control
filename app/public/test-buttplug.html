@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>Buttplug Test</title></head>
+<body>
+<h1>Buttplug Connection Test</h1>
+<pre id="status">Loading...</pre>
+<script type="module">
+import { ButtplugClient, ButtplugBrowserWebsocketClientConnector } from '/node_modules/buttplug/dist/web/index.js';
+
+const el = document.getElementById('status');
+const log = (msg) => { el.textContent += '\n' + msg; console.log(msg); };
+
+try {
+  const client = new ButtplugClient('Test');
+  client.addListener('deviceadded', (device) => log('DEVICE ADDED: ' + device.name));
+  client.addListener('disconnect', () => log('DISCONNECTED'));
+  
+  const connector = new ButtplugBrowserWebsocketClientConnector('ws://localhost:12345');
+  log('Connecting...');
+  await client.connect(connector);
+  log('Connected!');
+  log('Scanning...');
+  await client.startScanning();
+  log('Scan started. Waiting 15s...');
+  
+  setTimeout(async () => {
+    log('Devices: ' + client.devices.size);
+    client.devices.forEach(d => log(' - ' + d.name + ' [' + d.index + ']'));
+    await client.stopScanning();
+    await client.disconnect();
+    log('Done.');
+  }, 15000);
+} catch (err) {
+  log('ERROR: ' + err.message);
+}
+</script>
+</body>
+</html>
