@@ -8,7 +8,9 @@ export default defineConfig({
   base: './',
   plugins: [inspectAttr(), react()],
   server: {
+    host: true, // listen on all interfaces (0.0.0.0) for LAN access
     port: 3000,
+    strictPort: false,
   },
   resolve: {
     alias: {
