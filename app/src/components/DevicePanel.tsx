@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { BatteryIndicator } from '@/components/BatteryIndicator';
 import {
   Bluetooth,
   Wifi,
@@ -12,6 +13,7 @@ import {
   CheckCircle2,
   Smartphone,
   Loader2,
+  Signal,
 } from 'lucide-react';
 import type { DeviceState } from '@/types';
 
@@ -186,18 +188,29 @@ export function DevicePanel({
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center ring-2 ring-primary/10 animate-pulse-slow">
                       <Smartphone className="w-5 h-5 text-primary" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="font-medium text-sm">
                         {d.deviceName}
                       </p>
-                      <p className="text-xs text-muted-foreground">
-                        ID: {d.deviceIndex}
-                      </p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <p className="text-xs text-muted-foreground">
+                          ID: {d.deviceIndex}
+                        </p>
+                        {d.rssi !== undefined && (
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                            <Signal className="w-3 h-3" />
+                            <span>{d.rssi} dBm</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950">
-                    Connected
-                  </Badge>
+                  <div className="flex flex-col items-end gap-2">
+                    <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950">
+                      Connected
+                    </Badge>
+                    <BatteryIndicator level={d.batteryLevel} />
+                  </div>
                 </div>
               ))}
             </div>

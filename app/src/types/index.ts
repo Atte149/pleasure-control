@@ -9,6 +9,8 @@ export interface DeviceState {
   oscillateIntensity: number;
   constrictIntensity: number;
   isActive: boolean;
+  batteryLevel?: number; // 0-100 percentage, undefined if not supported
+  rssi?: number; // Signal strength, undefined if not available
 }
 
 export interface WaveformPoint {
