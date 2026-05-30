@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Phase 6: Android Packaging - COMPLETED ✅
+
+#### Added
+- Capacitor 6 integration (core, cli, android) — pinned to v6 for Node 20
+- Native Android project under `app/android/`
+- `capacitor.config.ts` — appId `com.pleasurecontrol.app`, cleartext enabled
+- `android:usesCleartextTraffic="true"` + INTERNET permission in manifest
+  (required for ws:// connection to Intiface over LAN)
+- Built debug APK: `builds/PleasureControl-debug.apk` (~3.8 MB)
+  - minSdk 22 (Android 5.1+), targetSdk 34, version 1.0
+- npm scripts: `android:sync`, `android:apk`, `android:open`
+- `ANDROID.md` with install, rebuild, release-signing, and connection guide
+
+#### Changed (connection refactor — prerequisite for Android)
+- Intiface server address is now configurable instead of hardcoded
+- `src/lib/serverConfig.ts` — get/set/normalize URL, persisted to localStorage
+- `useButtplug` reads the configured URL at connect time
+- DevicePanel shows an editable "Intiface Server Address" field when disconnected
+  (lets a phone reach Intiface on a PC by IP, e.g. ws://192.168.1.100:12345)
+
+#### Fixed (earlier this session)
+- Dev server now binds to all interfaces (`server.host: true`) for LAN access
+
+---
+
 ### Phase 1: UI/UX Modernization - COMPLETED ✅
 
 #### Added
