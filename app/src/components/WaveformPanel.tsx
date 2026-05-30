@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
+import { PatternPresets } from '@/components/PatternPresets';
+import { createPatternFromPreset, type PatternPreset } from '@/lib/patternPresets';
 import {
   Play,
   Pause,
@@ -362,16 +364,31 @@ export function WaveformPanel({
     setDraggingPoint(null);
   };
 
+  const handleSelectPreset = useCallback((preset: PatternPreset) => {
+    const pattern = createPatternFromPreset(preset);
+    onCreatePattern(pattern.name, pattern.duration, pattern.loop);
+    // Update the newly created pattern with preset points
+    setTimeout(() => {
+      const newPattern = patterns.find(p => p.name === pattern.name);
+      if (newPattern) {
+        onUpdatePoints(newPattern.id, pattern.points);
+      }
+    }, 100);
+  }, [onCreatePattern, onUpdatePoints, patterns]);
+
   const isDisabled = !isConnected || !hasDevices;
 
   return (
     <div className="space-y-4">
+      {/* Pattern Presets Library */}
+      <PatternPresets onSelectPreset={handleSelectPreset} />
+
       {/* Create New */}
-      <Card>
+      <Card className="transition-all duration-300 hover:shadow-lg">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg flex items-center gap-2">
-            <Plus className="w-5 h-5" />
-            Create Pattern
+            <Plus className="w-5 h-5 text-primary" />
+            Create Custom Pattern
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -404,8 +421,23 @@ export function WaveformPanel({
 
       {/* Pattern List */}
       <div className="space-y-3">
-        {patterns.map((pattern) => (
-          <Card key={pattern.id} className={activePattern?.id === pattern.id ? 'border-primary' : ''}>
+        {patterns.length === 0 && (
+          <Card className="border-dashed">
+            <CardContent className="pt-6 text-center text-muted-foreground">
+              <Waves className="w-12 h-12 mx-auto mb-3 opacity-40" />
+              <p className="font-medium">No patterns yet</p>
+              <p className="text-sm mt-1">Select a preset above or create a custom pattern</p>
+            </CardContent>
+          </Card>
+        )}
+        {patterns.map((pattern, index) => (
+          <Card
+            key={pattern.id}
+            className={`transition-all duration-300 hover:shadow-lg animate-in fade-in slide-in-from-bottom-2 ${
+              activePattern?.id === pattern.id ? 'border-primary ring-2 ring-primary/20' : ''
+            }`}
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2">
@@ -501,7 +533,7 @@ export function WaveformPanel({
                   <Button
                     onClick={() => onStartPlayback(pattern)}
                     disabled={isDisabled || (isPlaying && activePattern?.id === pattern.id)}
-                    className="flex-1"
+                    className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
                     size="sm"
                   >
                     <Play className="w-4 h-4 mr-1" />
@@ -529,6 +561,7 @@ export function WaveformPanel({
                     onClick={() => onDeletePattern(pattern.id)}
                     variant="outline"
                     size="sm"
+                    className="hover:bg-destructive hover:text-destructive-foreground"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
