@@ -84,7 +84,7 @@ export function SettingsPanel() {
   return (
     <div className="space-y-4">
       {/* Statistics */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="w-5 h-5 text-primary" />
@@ -180,7 +180,7 @@ export function SettingsPanel() {
       </Card>
 
       {/* Settings */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Settings className="w-5 h-5 text-primary" />

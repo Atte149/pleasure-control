@@ -128,7 +128,7 @@ export function GameMode({ isConnected, hasDevices, onIntensityChange }: GameMod
   return (
     <div className="space-y-4">
       {/* Roulette */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -178,7 +178,7 @@ export function GameMode({ isConnected, hasDevices, onIntensityChange }: GameMod
       </Card>
 
       {/* Dice Game */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -228,7 +228,7 @@ export function GameMode({ isConnected, hasDevices, onIntensityChange }: GameMod
       </Card>
 
       {/* Card Draw */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -276,7 +276,7 @@ export function GameMode({ isConnected, hasDevices, onIntensityChange }: GameMod
       </Card>
 
       {/* Timer Challenge */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -338,7 +338,7 @@ export function GameMode({ isConnected, hasDevices, onIntensityChange }: GameMod
       </Card>
 
       {/* Progressive Mode */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>

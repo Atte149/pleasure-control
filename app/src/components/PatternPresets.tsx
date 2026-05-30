@@ -32,7 +32,7 @@ export function PatternPresets({ onSelectPreset }: PatternPresetsProps) {
   };
 
   return (
-    <Card className="transition-all duration-300 hover:shadow-lg">
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-primary" />
@@ -56,13 +56,12 @@ export function PatternPresets({ onSelectPreset }: PatternPresetsProps) {
             <TabsContent key={category} value={category} className="mt-0">
               <ScrollArea className="h-[400px] pr-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {getPatternsByCategory(category).map((preset, index) => {
+                  {getPatternsByCategory(category).map((preset) => {
                     const Icon = categoryIcons[preset.category];
                     return (
                       <div
                         key={preset.id}
-                        className="group relative p-4 border rounded-lg hover:bg-accent/50 transition-all duration-300 hover:shadow-md hover:scale-[1.02] cursor-pointer animate-in fade-in slide-in-from-bottom-2"
-                        style={{ animationDelay: `${index * 50}ms` }}
+                        className="group relative p-4 border rounded-lg hover:bg-accent/50 transition-colors cursor-pointer"
                         onClick={() => onSelectPreset(preset)}
                       >
                         <div className="flex items-start gap-3">

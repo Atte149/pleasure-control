@@ -167,7 +167,7 @@ export function ManualControlPanel({
       </div>
 
       {activeTab === 'master' ? (
-        <Card className="transition-all duration-300 hover:shadow-lg">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
               <Zap className="w-5 h-5 text-primary" />
@@ -183,22 +183,14 @@ export function ManualControlPanel({
                 </Label>
                 <Badge variant="secondary" className="text-base font-semibold">{Math.round(masterIntensity * 100)}%</Badge>
               </div>
-              <div className="relative">
-                <Slider
-                  value={[masterIntensity]}
-                  onValueChange={([v]) => handleMasterVibrate(v)}
-                  min={0}
-                  max={1}
-                  step={0.01}
-                  className="w-full"
-                />
-                {masterIntensity > 0 && (
-                  <div
-                    className="absolute -top-1 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-300 animate-gradient"
-                    style={{ width: `${masterIntensity * 100}%` }}
-                  />
-                )}
-              </div>
+              <Slider
+                value={[masterIntensity]}
+                onValueChange={([v]) => handleMasterVibrate(v)}
+                min={0}
+                max={1}
+                step={0.01}
+                className="w-full"
+              />
             </div>
             <Button onClick={stopAll} variant="destructive" className="w-full">
               Stop All Devices
@@ -214,7 +206,7 @@ export function ManualControlPanel({
             const hasOscillate = device?.hasOutput(OutputType.Oscillate) ?? false;
 
             return (
-              <Card key={deviceIndex} className="transition-all duration-300 hover:shadow-lg">
+              <Card key={deviceIndex}>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base flex items-center gap-2">
@@ -242,22 +234,14 @@ export function ManualControlPanel({
                           {Math.round(vibrateIntensity * 100)}%
                         </span>
                       </div>
-                      <div className="relative">
-                        <Slider
-                          value={[vibrateIntensity]}
-                          onValueChange={([v]) => handleVibrateChange(deviceIndex, v)}
-                          min={0}
-                          max={1}
-                          step={0.01}
-                          className="w-full"
-                        />
-                        {vibrateIntensity > 0 && (
-                          <div
-                            className="absolute -top-1 left-0 h-1 bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300 animate-pulse"
-                            style={{ width: `${vibrateIntensity * 100}%` }}
-                          />
-                        )}
-                      </div>
+                      <Slider
+                        value={[vibrateIntensity]}
+                        onValueChange={([v]) => handleVibrateChange(deviceIndex, v)}
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        className="w-full"
+                      />
                     </div>
                   )}
 

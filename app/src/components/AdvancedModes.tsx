@@ -45,7 +45,7 @@ export function AdvancedModes({
   return (
     <div className="space-y-4">
       {/* Surprise Me Mode */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -106,7 +106,7 @@ export function AdvancedModes({
       </Card>
 
       {/* Edge Mode */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
@@ -204,7 +204,7 @@ export function AdvancedModes({
       </Card>
 
       {/* Sync Mode */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card className="">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>

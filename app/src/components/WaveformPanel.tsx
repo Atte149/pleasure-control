@@ -384,7 +384,7 @@ export function WaveformPanel({
       <PatternPresets onSelectPreset={handleSelectPreset} />
 
       {/* Create New */}
-      <Card className="transition-all duration-300 hover:shadow-lg">
+      <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-lg flex items-center gap-2">
             <Plus className="w-5 h-5 text-primary" />
@@ -430,13 +430,10 @@ export function WaveformPanel({
             </CardContent>
           </Card>
         )}
-        {patterns.map((pattern, index) => (
+        {patterns.map((pattern) => (
           <Card
             key={pattern.id}
-            className={`transition-all duration-300 hover:shadow-lg animate-in fade-in slide-in-from-bottom-2 ${
-              activePattern?.id === pattern.id ? 'border-primary ring-2 ring-primary/20' : ''
-            }`}
-            style={{ animationDelay: `${index * 50}ms` }}
+            className={activePattern?.id === pattern.id ? 'border-primary' : ''}
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
