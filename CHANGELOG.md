@@ -12,10 +12,15 @@ All notable changes to this project will be documented in this file.
 - `capacitor.config.ts` — appId `com.pleasurecontrol.app`, cleartext enabled
 - `android:usesCleartextTraffic="true"` + INTERNET permission in manifest
   (required for ws:// connection to Intiface over LAN)
-- Built debug APK: `builds/PleasureControl-debug.apk` (~3.8 MB)
+- Built debug APK: `builds/PleasureControl-debug.apk` (~3.9 MB)
   - minSdk 22 (Android 5.1+), targetSdk 34, version 1.0
 - npm scripts: `android:sync`, `android:apk`, `android:open`
 - `ANDROID.md` with install, rebuild, release-signing, and connection guide
+- **Intiface Mobile support** — autonomous BLE control from phone without PC:
+  - Android platform auto-detection (`isAndroid()` in serverConfig)
+  - Default server URL on Android: `ws://localhost:12345` (Intiface Mobile on device)
+  - DevicePanel shows blue info box on Android with Play Store install link
+  - Updated ANDROID.md: Variant A (Intiface Mobile, recommended) + Variant B (PC over Wi-Fi)
 
 #### Changed (connection refactor — prerequisite for Android)
 - Intiface server address is now configurable instead of hardcoded
