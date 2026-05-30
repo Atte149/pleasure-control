@@ -6,7 +6,7 @@ import { WaveformPanel } from '@/components/WaveformPanel';
 import { AdvancedModes } from '@/components/AdvancedModes';
 import { GameMode } from '@/components/GameMode';
 import { AudioPanel } from '@/components/AudioPanel';
-import { GuidePanel } from '@/components/GuidePanel';
+import { SettingsPanel } from '@/components/SettingsPanel';
 import { WaveformPlayer } from '@/components/WaveformPlayer';
 import { AudioPlayer } from '@/components/AudioPlayer';
 import { useButtplug } from '@/hooks/useButtplug';
@@ -131,8 +131,8 @@ export default function Home() {
             onSetIntensityScale={audio.setIntensityScale}
           />
         );
-      case 'guide':
-        return <GuidePanel />;
+      case 'settings':
+        return <SettingsPanel />;
       default:
         return null;
     }

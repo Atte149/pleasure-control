@@ -36,6 +36,6 @@ export interface AudioAnalysisState {
   intensityScale: number;
 }
 
-export type TabType = 'devices' | 'manual' | 'patterns' | 'modes' | 'games' | 'audio' | 'guide';
+export type TabType = 'devices' | 'manual' | 'patterns' | 'modes' | 'games' | 'audio' | 'settings';
 
 export type OutputCapability = 'Vibrate' | 'Rotate' | 'Oscillate' | 'Constrict';

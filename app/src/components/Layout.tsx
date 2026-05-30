@@ -7,7 +7,7 @@ import {
   Smartphone,
   Waves,
   Music,
-  BookOpen,
+  Settings,
   Zap,
   Menu,
   Bluetooth,
@@ -32,7 +32,7 @@ const tabs: { id: TabType; label: string; icon: React.ElementType }[] = [
   { id: 'modes', label: 'Modes', icon: Sparkles },
   { id: 'games', label: 'Games', icon: Gamepad2 },
   { id: 'audio', label: 'Audio', icon: Music },
-  { id: 'guide', label: 'Guide', icon: BookOpen },
+  { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
 export function Layout({
