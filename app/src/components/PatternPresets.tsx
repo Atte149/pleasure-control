@@ -1,9 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PATTERN_PRESETS, createPatternFromPreset, type PatternPreset } from '@/lib/patternPresets';
+import { PATTERN_PRESETS, type PatternPreset } from '@/lib/patternPresets';
 import { Sparkles, Zap, Activity, Shuffle } from 'lucide-react';
 
 interface PatternPresetsProps {
