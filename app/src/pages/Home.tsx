@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout';
 import { DevicePanel } from '@/components/DevicePanel';
 import { ManualControlPanel } from '@/components/ManualControlPanel';
 import { WaveformPanel } from '@/components/WaveformPanel';
+import { AdvancedModes } from '@/components/AdvancedModes';
 import { AudioPanel } from '@/components/AudioPanel';
 import { GuidePanel } from '@/components/GuidePanel';
 import { WaveformPlayer } from '@/components/WaveformPlayer';
@@ -61,7 +62,7 @@ export default function Home() {
             getDevice={getDevice}
           />
         );
-      case 'waveform':
+      case 'patterns':
         return (
           <WaveformPanel
             patterns={waveform.patterns}
@@ -77,6 +78,23 @@ export default function Home() {
             onUpdatePattern={waveform.updatePattern}
             onDeletePattern={waveform.deletePattern}
             onUpdatePoints={waveform.updatePatternPoints}
+          />
+        );
+      case 'modes':
+        return (
+          <AdvancedModes
+            patterns={waveform.patterns}
+            isConnected={isConnected}
+            hasDevices={devices.size > 0}
+            onIntensityChange={(intensity) => {
+              // Apply intensity to all devices
+              devices.forEach((_, deviceId) => {
+                const device = getDevice(deviceId);
+                if (device) {
+                  updateDeviceState(deviceId, { vibrateIntensity: intensity });
+                }
+              });
+            }}
           />
         );
       case 'audio':

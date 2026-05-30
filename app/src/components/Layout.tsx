@@ -12,6 +12,7 @@ import {
   Menu,
   Bluetooth,
   Wifi,
+  Sparkles,
 } from 'lucide-react';
 import type { TabType } from '@/types';
 
@@ -26,7 +27,8 @@ interface LayoutProps {
 const tabs: { id: TabType; label: string; icon: React.ElementType }[] = [
   { id: 'devices', label: 'Devices', icon: Smartphone },
   { id: 'manual', label: 'Manual', icon: Zap },
-  { id: 'waveform', label: 'Waveform', icon: Waves },
+  { id: 'patterns', label: 'Patterns', icon: Waves },
+  { id: 'modes', label: 'Modes', icon: Sparkles },
   { id: 'audio', label: 'Audio', icon: Music },
   { id: 'guide', label: 'Guide', icon: BookOpen },
 ];
