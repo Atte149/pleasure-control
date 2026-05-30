@@ -72,13 +72,13 @@ export function DevicePanel({
           </div>
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md flex items-start gap-2">
-              <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+            <div className="p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-md flex items-start gap-2 animate-in fade-in slide-in-from-top-2">
+              <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 mt-0.5 flex-shrink-0" />
               <div className="flex-1">
-                <p className="text-sm text-red-700">{error}</p>
+                <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
                 <button
                   onClick={onClearError}
-                  className="text-xs text-red-500 hover:text-red-700 mt-1 underline"
+                  className="text-xs text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 mt-1 underline transition-colors"
                 >
                   Dismiss
                 </button>
@@ -176,14 +176,15 @@ export function DevicePanel({
             </div>
           ) : (
             <div className="space-y-2">
-              {Array.from(devices.values()).map((d) => (
+              {Array.from(devices.values()).map((d, index) => (
                 <div
                   key={d.deviceIndex}
-                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent/50 transition-colors"
+                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent/50 transition-all duration-300 hover:shadow-md hover:scale-[1.02] animate-in fade-in slide-in-from-bottom-2"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Smartphone className="w-4 h-4 text-primary" />
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center ring-2 ring-primary/10 animate-pulse-slow">
+                      <Smartphone className="w-5 h-5 text-primary" />
                     </div>
                     <div>
                       <p className="font-medium text-sm">
@@ -194,7 +195,7 @@ export function DevicePanel({
                       </p>
                     </div>
                   </div>
-                  <Badge variant="outline" className="text-green-600 border-green-200 bg-green-50">
+                  <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950">
                     Connected
                   </Badge>
                 </div>
