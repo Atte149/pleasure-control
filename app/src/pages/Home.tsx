@@ -4,6 +4,7 @@ import { DevicePanel } from '@/components/DevicePanel';
 import { ManualControlPanel } from '@/components/ManualControlPanel';
 import { WaveformPanel } from '@/components/WaveformPanel';
 import { AdvancedModes } from '@/components/AdvancedModes';
+import { GameMode } from '@/components/GameMode';
 import { AudioPanel } from '@/components/AudioPanel';
 import { GuidePanel } from '@/components/GuidePanel';
 import { WaveformPlayer } from '@/components/WaveformPlayer';
@@ -84,6 +85,22 @@ export default function Home() {
         return (
           <AdvancedModes
             patterns={waveform.patterns}
+            isConnected={isConnected}
+            hasDevices={devices.size > 0}
+            onIntensityChange={(intensity) => {
+              // Apply intensity to all devices
+              devices.forEach((_, deviceId) => {
+                const device = getDevice(deviceId);
+                if (device) {
+                  updateDeviceState(deviceId, { vibrateIntensity: intensity });
+                }
+              });
+            }}
+          />
+        );
+      case 'games':
+        return (
+          <GameMode
             isConnected={isConnected}
             hasDevices={devices.size > 0}
             onIntensityChange={(intensity) => {

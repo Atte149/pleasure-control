@@ -13,6 +13,7 @@ import {
   Bluetooth,
   Wifi,
   Sparkles,
+  Gamepad2,
 } from 'lucide-react';
 import type { TabType } from '@/types';
 
@@ -29,6 +30,7 @@ const tabs: { id: TabType; label: string; icon: React.ElementType }[] = [
   { id: 'manual', label: 'Manual', icon: Zap },
   { id: 'patterns', label: 'Patterns', icon: Waves },
   { id: 'modes', label: 'Modes', icon: Sparkles },
+  { id: 'games', label: 'Games', icon: Gamepad2 },
   { id: 'audio', label: 'Audio', icon: Music },
   { id: 'guide', label: 'Guide', icon: BookOpen },
 ];
