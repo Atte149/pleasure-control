@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Bug Fixes - 2026-05-31
+
+#### Fixed
+- **Critical**: Fixed missing `await` on device.stop() in individual device stop button
+  - Previously: device.stop() called without waiting, could fail silently
+  - Now: Properly awaits all intensity changes and stop command with timeout
+  - Matches the pattern used in stopAll() function
+- **Critical**: Fixed race condition in preset pattern loading
+  - Previously: Used name-based lookup which could apply points to wrong pattern
+  - Now: Uses returned pattern ID directly, eliminating race condition
+  - Prevents bugs when multiple patterns share the same name
+- **Medium**: Fixed Remove button deleting last point when no point selected
+  - Previously: `draggingPoint ?? pattern.points.length - 1` removed last point
+  - Now: Button disabled when no point selected (draggingPoint === null)
+  - Only removes the actually selected point
+
 ### Phase 6: Android Packaging - COMPLETED ✅
 
 #### Added

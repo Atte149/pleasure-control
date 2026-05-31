@@ -366,15 +366,15 @@ export function WaveformPanel({
 
   const handleSelectPreset = useCallback((preset: PatternPreset) => {
     const pattern = createPatternFromPreset(preset);
-    onCreatePattern(pattern.name, pattern.duration, pattern.loop);
+    const newPattern = onCreatePattern(pattern.name, pattern.duration, pattern.loop);
     // Update the newly created pattern with preset points
-    setTimeout(() => {
-      const newPattern = patterns.find(p => p.name === pattern.name);
-      if (newPattern) {
+    // Use the returned pattern ID to avoid race conditions with duplicate names
+    if (newPattern) {
+      setTimeout(() => {
         onUpdatePoints(newPattern.id, pattern.points);
-      }
-    }, 100);
-  }, [onCreatePattern, onUpdatePoints, patterns]);
+      }, 100);
+    }
+  }, [onCreatePattern, onUpdatePoints]);
 
   const isDisabled = !isConnected || !hasDevices;
 
@@ -504,10 +504,14 @@ export function WaveformPanel({
                         Add Point
                       </Button>
                       <Button
-                        onClick={() => pattern.points.length > 2 && removePoint(draggingPoint ?? pattern.points.length - 1)}
+                        onClick={() => {
+                          if (pattern.points.length > 2 && draggingPoint !== null) {
+                            removePoint(draggingPoint);
+                          }
+                        }}
                         variant="outline"
                         size="sm"
-                        disabled={pattern.points.length <= 2}
+                        disabled={pattern.points.length <= 2 || draggingPoint === null}
                       >
                         <Trash2 className="w-3.5 h-3.5 mr-1" />
                         Remove

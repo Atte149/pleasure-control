@@ -290,11 +290,17 @@ export function ManualControlPanel({
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => {
-                      handleVibrateChange(deviceIndex, 0);
-                      handleRotateChange(deviceIndex, 0);
-                      handleOscillateChange(deviceIndex, 0);
-                      device?.stop().catch(() => {});
+                    onClick={async () => {
+                      await handleVibrateChange(deviceIndex, 0);
+                      await handleRotateChange(deviceIndex, 0);
+                      await handleOscillateChange(deviceIndex, 0);
+                      if (device) {
+                        try {
+                          await withTimeout(device.stop(), 'stop command');
+                        } catch {
+                          // ignore timeout errors
+                        }
+                      }
                     }}
                     className="w-full"
                   >
