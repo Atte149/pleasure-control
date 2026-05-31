@@ -12,3 +12,9 @@ dist/
 .cache/
 coverage/
 build/
+builds/
+*.apk
+*.aab
+android/app/build/
+android/.gradle/
+.claude/

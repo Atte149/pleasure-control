@@ -1,8 +1,8 @@
-# Pleasure Control - Финальная документация
+# Pleasure Control - User Guide
 
-## 📋 Обзор проекта
+## 📋 Project Overview
 
-**Pleasure Control** - профессиональное веб-приложение для управления интимными устройствами через протокол Buttplug.io. Приложение полностью переработано с современным UI/UX, расширенным функционалом и персонализацией.
+**Pleasure Control** is a professional web application for controlling intimate devices via the Buttplug.io protocol. The application features modern UI/UX, extensive functionality, and personalization options.
 
 ## ✨ Реализованные функции
 

@@ -1,8 +1,18 @@
 {
-  "name": "my-app",
+  "name": "pleasure-control",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "A modern web application for controlling intimate devices via Buttplug.io protocol",
+  "keywords": ["buttplug", "intimate-devices", "device-control", "react", "typescript"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/pleasure-control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/pleasure-control/issues"
+  },
+  "homepage": "https://github.com/yourusername/pleasure-control#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
