@@ -115,7 +115,7 @@ intiface-engine --version
 
 ```bash
 git clone <repository-url>
-cd sex_controller/app
+cd pleasure-control/app
 ```
 
 ### 5. Install Dependencies

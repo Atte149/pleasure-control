@@ -7,7 +7,7 @@ Guide for developers who want to understand, modify, or extend the Sex Controlle
 ## Project Structure
 
 ```
-sex_controller/app/
+pleasure-control/app/
 ├── src/
 │   ├── hooks/                    # Custom React hooks (core business logic)
 │   │   ├── useButtplug.ts        # Buttplug.io WebSocket client integration

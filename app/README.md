@@ -48,7 +48,7 @@ For a persistent service, see [docs/SETUP.md](docs/SETUP.md#systemd-service-setu
 
 ```bash
 git clone <repository-url>
-cd sex_controller/app
+cd pleasure-control/app
 npm install
 ```
 
